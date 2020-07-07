@@ -1,0 +1,17 @@
+h1 支出一覧
+
+= link_to '支出登録', new_expence_path, class: 'btn btn-primary'
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= Expence.human_attribute_name(:name)
+      th= Expence.human_attribute_name(:amount)
+      th= Expence.human_attribute_name(:created_at)
+  tbody
+    - @expences.each do |expence|
+      tr
+        td= expence.name
+        td= "#{expence.amount}円"
+        td= expence.created_at
