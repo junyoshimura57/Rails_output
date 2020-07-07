@@ -4,6 +4,7 @@ class ExpencesController < ApplicationController
   end
 
   def show
+    @expence = Expence.find(params[:id])
   end
 
   def new
@@ -17,6 +18,19 @@ class ExpencesController < ApplicationController
   end
 
   def edit
+    @expence = Expence.find(params[:id])
+  end
+
+  def update
+    expence = Expence.find(params[:id])
+    expence.update!(expence_params)
+    redirect_to expences_url, notice: "支出「#{expence.name}」を更新しました。"
+  end
+
+  def destroy
+    expence = Expence.find(params[:id])
+    expence.destroy
+    redirect_to expences_url, notice: "支出「#{expence.name}」を削除しました。"
   end
 
   private

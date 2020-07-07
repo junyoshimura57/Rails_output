@@ -3,14 +3,4 @@ h1 支出の新規登録
 .nav.justify-content-end
   = link_to '一覧', expences_path, class: 'nav-link'
 
-= form_with model: @expence, local: true do |f|
-  .form-group
-    = f.label :name
-    = f.text_field :name, class: 'form-control', id: 'expence_name'
-  .form-group
-    = f.label :amount
-    = f.number_field :amount, step:"10", class: 'form-control', id: 'expence_amount'
-  .form-group
-    = f.label :description
-    = f.text_area :description, class: 'form-control', id: 'expence_description'
-  = f.submit nil, class: 'btn btn-primary'
+= render partial: 'form', locals:{ expence: @expence }
