@@ -12,9 +12,12 @@ class ExpencesController < ApplicationController
   end
 
   def create
-    expence = Expence.new(expence_params)
-    expence.save!
-    redirect_to expences_url, notice: "支出「#{expence.name}」を登録しました。"
+    @expence = Expence.new(expence_params)
+    if @expence.save
+      redirect_to expences_url, notice: "支出「#{@expence.name}」を登録しました。"
+    else
+      render :new
+    end
   end
 
   def edit
