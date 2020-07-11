@@ -18,10 +18,9 @@
 ■備考  
 1.itemテーブルには今回はユーザーが追加、編集できる機能は実装せず、支出種類(食費、洋服、交際費など)を事前に登録しておく。  
 2.各ユーザー同士では支出内容が表示されないようにする。  
-3.管理者ユーザー
 
 ■ER図  
-<img width="656" alt="ER図" src="https://user-images.githubusercontent.com/63130663/86524318-01189380-beb4-11ea-9777-7de87fd7ede2.png">
+[![Image from Gyazo](https://i.gyazo.com/5f4724f5472f9cc5f387937ec53f660e.png)](https://gyazo.com/5f4724f5472f9cc5f387937ec53f660e)
 
 ■エンドポイント表  
 | No. | やりたいこと               | HTTP動詞    | URIパターン            | Controller#Action     |
