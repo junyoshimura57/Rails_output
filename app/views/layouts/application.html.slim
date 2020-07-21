@@ -12,12 +12,15 @@ html
       .navbar-brand pocket_money_app
 
       ul.navbar-nav.ml-auto
-        - if current_user
-          li.nav-item= link_to '子供支出一覧', expences_path, class: 'nav-link'
-          li.nav-item= link_to '子供一覧', admin_users_path, class: 'nav-link'
+        - if parent_user
+          li.nav-item= link_to '子供の支出一覧', expences_path, class: 'nav-link'
+          li.nav-item= link_to '子供アカウント作成・一覧', admin_users_path, class: 'nav-link'
+          li.nav-item= link_to 'ログアウト', logout_path,method: :delete, class: 'nav-link'
+        - elsif child_user
+          li.nav-item= link_to '支出登録・一覧', expences_path, class: 'nav-link'
           li.nav-item= link_to 'ログアウト', logout_path,method: :delete, class: 'nav-link'
         - else
-          li.nav-item= link_to 'ログイン', login_path, class: 'nav-link'
+          li.nav-item= link_to '親権者アカウントの作成', new_admin_user_path, class: 'nav-link'
     .container
       - if flash.notice.present?
         .alert.alert-success= flash.notice

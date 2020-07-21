@@ -1,21 +1,37 @@
 h1 支出一覧
-
-= link_to '支出登録', new_expence_path, class: 'btn btn-primary'
+- if child_user
+  = link_to '支出登録', new_expence_path, class: 'btn btn-primary'
 
 .mb-3
 table.table.table-hover
   thead.thead-default
+  - if parent_user
+    tr
+      th= Expence.human_attribute_name(:name)
+      th= Expence.human_attribute_name(:amount)
+      th= Expence.human_attribute_name(:created_at)
+      th= User.human_attribute_name(:name)
+      th
+    tbody
+      - @self_children.each do |self_child|
+        - self_child.expences.each do |expence|
+          tr
+            td= expence.name
+            td= "#{expence.amount}円"
+            td= expence.created_at
+            td= self_child.name
+  - else
     tr
       th= Expence.human_attribute_name(:name)
       th= Expence.human_attribute_name(:amount)
       th= Expence.human_attribute_name(:created_at)
       th
-  tbody
-    - @expences.each do |expence|
-      tr
-        td= link_to expence.name, expence
-        td= "#{expence.amount}円"
-        td= expence.created_at
-        td
-          = link_to '編集', edit_expence_path(expence), class: 'btn btn-primary mr-3'
-          = link_to '削除', expence, method: :delete, data: { confirm: "支出「#{expence.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
+    tbody
+      - @expences.each do |expence|
+        tr
+          td= link_to expence.name, expence
+          td= "#{expence.amount}円"
+          td= expence.created_at
+          td
+            = link_to '編集', edit_expence_path(expence), class: 'btn btn-primary mr-3'
+            = link_to '削除', expence, method: :delete, data: { confirm: "支出「#{expence.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
