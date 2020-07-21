@@ -1,6 +1,18 @@
 class ExpencesController < ApplicationController
   def index
-    @expences = current_user.expences
+    # 親アカウントの場合は、紐付く子供アカウントの支出を表示
+    # 【メモ】以下だとエラーが外れなかったため、view側で二次元配列を展開
+    # self_children = parent_user.children
+    # @expences = []
+    # self_children.each do |self_child|
+    #   @expences << self_child.expences
+    # end
+
+    if parent_user
+      @self_children = parent_user.children
+    else
+      @expences = child_user.expences
+    end
   end
 
   def show
