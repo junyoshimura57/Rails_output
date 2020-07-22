@@ -18,7 +18,7 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
       user:
-        name: 子供名
+        name: 登録子供名
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）

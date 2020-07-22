@@ -5,23 +5,17 @@ h1 支出の詳細
 table.table.table-hover
   tbody
     tr
-      th= Expence.human_attribute_name(:id)
-      td= @expence.id
-    tr
       th= Expence.human_attribute_name(:name)
       td= @expence.name
     tr
       th= Expence.human_attribute_name(:amount)
-      td= "#{@expence.amount}円"
+      td= "#{@expence.amount.to_s(:delimited)}円"
     tr
       th= Expence.human_attribute_name(:description)
-      td= simple_format(h(@expence.description), {}, sanitize: false, wrapper_tag:"div")
+      td= auto_link(simple_format(h(@expence.description), {}, sanitize: false, wrapper_tag:"div"))
     tr
       th= Expence.human_attribute_name(:created_at)
-      td= @expence.created_at
-    tr
-      th= Expence.human_attribute_name(:updated_at)
-      td= @expence.updated_at
+      td= l @expence.created_at, format: :short
 
 = link_to '編集', edit_expence_path, class: 'btn btn-primary mr-3'
 = link_to '削除', @expence, method: :delete, data: { confirm: "支出「#{@expence.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
