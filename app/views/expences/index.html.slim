@@ -17,8 +17,8 @@ table.table.table-hover
         - self_child.expences.each do |expence|
           tr
             td= expence.name
-            td= "#{expence.amount}円"
-            td= expence.created_at
+            td= "#{expence.amount.to_s(:delimited)}円"
+            td= l expence.created_at, format: :short
             td= self_child.name
   - else
     tr
@@ -30,8 +30,8 @@ table.table.table-hover
       - @expences.each do |expence|
         tr
           td= link_to expence.name, expence
-          td= "#{expence.amount}円"
-          td= expence.created_at
+          td= "#{expence.amount.to_s(:delimited)}円"
+          td= l expence.created_at, format: :short
           td
             = link_to '編集', edit_expence_path(expence), class: 'btn btn-primary mr-3'
             = link_to '削除', expence, method: :delete, data: { confirm: "支出「#{expence.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'

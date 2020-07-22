@@ -8,19 +8,30 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    .app-title.navbar.navbar-expand-md.navbar-light.bg-light
-      .navbar-brand pocket_money_app
+    - if parent_user
+      .app-title.navbar.navbar-expand-md.navbar-light.bg-primary
+        .navbar-brand pocket_money_app(親権者アカウント)
 
-      ul.navbar-nav.ml-auto
-        - if parent_user
+        ul.navbar-nav.ml-auto
           li.nav-item= link_to '子供の支出一覧', expences_path, class: 'nav-link'
           li.nav-item= link_to '子供アカウント作成・一覧', admin_users_path, class: 'nav-link'
           li.nav-item= link_to 'ログアウト', logout_path,method: :delete, class: 'nav-link'
-        - elsif child_user
+
+    - elsif child_user
+      .app-title.navbar.navbar-expand-md.navbar-light.bg-secondary
+        .navbar-brand pocket_money_app(子供アカウント)
+
+        ul.navbar-nav.ml-auto
           li.nav-item= link_to '支出登録・一覧', expences_path, class: 'nav-link'
           li.nav-item= link_to 'ログアウト', logout_path,method: :delete, class: 'nav-link'
-        - else
+
+    - else
+      .app-title.navbar.navbar-expand-md.navbar-light.bg-light
+        .navbar-brand pocket_money_app(ログイン画面)
+
+        ul.navbar-nav.ml-auto
           li.nav-item= link_to '親権者アカウントの作成', new_admin_user_path, class: 'nav-link'
+          
     .container
       - if flash.notice.present?
         .alert.alert-success= flash.notice
