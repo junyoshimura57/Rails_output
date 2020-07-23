@@ -1,4 +1,13 @@
 h1 支出一覧
+/ -if parent_user
+/   = search_form_for @q, class: 'mb-5' do |f|
+/     .form-group.row
+/       =f.label :name_cont, '名称', class: 'col-sm-2 col-form-label'
+/       .col-sm-10
+/         =f.search_field :name_cont, class: 'form-control'
+/     .form-group
+/         =f.submit class: 'btn btn-outline-primary'
+
 - if child_user
   = link_to '支出登録', new_expence_path, class: 'btn btn-primary'
 
@@ -8,21 +17,23 @@ table.table.table-hover
   - if parent_user
     tr
       th= Expence.human_attribute_name(:name)
+      th= Expence.human_attribute_name(:category)
       th= Expence.human_attribute_name(:amount)
       th= Expence.human_attribute_name(:created_at)
       th= User.human_attribute_name(:name)
       th
     tbody
-      - @self_children.each do |self_child|
-        - self_child.expences.each do |expence|
+      - @expences.each do |expence|
           tr
             td= expence.name
+            td= expence.category
             td= "#{expence.amount.to_s(:delimited)}円"
             td= l expence.created_at, format: :short
-            td= self_child.name
+            td= expence.user.name
   - else
     tr
       th= Expence.human_attribute_name(:name)
+      th= Expence.human_attribute_name(:category)
       th= Expence.human_attribute_name(:amount)
       th= Expence.human_attribute_name(:created_at)
       th
@@ -30,6 +41,7 @@ table.table.table-hover
       - @expences.each do |expence|
         tr
           td= link_to expence.name, expence
+          td= expence.category
           td= "#{expence.amount.to_s(:delimited)}円"
           td= l expence.created_at, format: :short
           td

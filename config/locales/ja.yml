@@ -13,12 +13,13 @@ ja:
       expence:
         id: ID
         name: 名称
+        category: カテゴリー
         amount: 金額
         description: 詳細
         created_at: 登録日時
         updated_at: 更新日時
       user:
-        name: 登録子供名
+        name: 支出子供名
         email: メールアドレス
         password: パスワード
         password_confirmation: パスワード（確認）
