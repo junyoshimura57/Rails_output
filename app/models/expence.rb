@@ -3,4 +3,6 @@ class Expence < ApplicationRecord
   validates :amount, numericality: {only_integer: true}
 
   belongs_to :user
+
+  scope :recent, -> { order(created_at: :desc) }
 end
