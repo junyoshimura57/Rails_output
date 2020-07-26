@@ -9,7 +9,7 @@
     = f.text_field :name, class: 'form-control', id: 'expence_name'
   .form-group
     = f.label :category
-    = f.select :category, [['食費', '食費'], ['衣服', '衣服'], ['勉強', '勉強'], ['交通費', '交通費'], ['日用品', '日用品'], ['その他', 'その他']], {}, class: 'form-control', id: 'expence_category'
+    = f.select :category, [['食費', '食費'], ['衣服', '衣服'], ['勉強', '勉強'], ['部活', '部活'], ['交通費', '交通費'], ['日用品', '日用品'], ['その他', 'その他']], {}, class: 'form-control', id: 'expence_category'
   .form-group
     = f.label :amount
     = f.number_field :amount, step:'10', class: 'form-control', id: 'expence_amount'
