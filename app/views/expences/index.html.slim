@@ -1,17 +1,24 @@
 h1 支出一覧
-/ -if parent_user
-/   = search_form_for @q, class: 'mb-5' do |f|
-/     .form-group.row
-/       =f.label :name_cont, '名称', class: 'col-sm-2 col-form-label'
-/       .col-sm-10
-/         =f.search_field :name_cont, class: 'form-control'
-/     .form-group
-/         =f.submit class: 'btn btn-outline-primary'
+-if parent_user
+  = search_form_for @q, class: 'mb-5' do |f|
+    .form-group.row
+      =f.label :category_eq, 'カテゴリー', class: 'col-sm-2 col-form-label'
+      .col-sm-10
+        = f.select :category_eq, [['食費', '食費'], ['衣服', '衣服'], ['勉強', '勉強'], ['部活', '部活'], ['交通費', '交通費'], ['日用品', '日用品'], ['その他', 'その他']], {include_blank: '指定なし'}, class: 'form-control'  
+    .form-group.row
+      =f.label :user_name_eq, '子供名', class: 'col-sm-2 col-form-label'
+      .col-sm-10
+        =f.collection_select :user_name_eq, @self_children, :name, :name, {include_blank: '指定なし'}, class: 'form-control'
+    .form-group
+        =f.submit class: 'btn btn-outline-primary'
 
 - if child_user
   = link_to '支出登録', new_expence_path, class: 'btn btn-primary'
 
 .mb-3
+  = paginate @expences
+  = page_entries_info @expences
+  
 table.table.table-hover
   thead.thead-default
   - if parent_user

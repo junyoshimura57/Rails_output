@@ -1,15 +1,13 @@
 class ExpencesController < ApplicationController
   before_action :set_expence, only: [:show, :edit, :update, :destroy]
   def index
-    # 親アカウントの場合は、紐付く子供アカウントの支出を表示(ここの書き方がおかしい...)
+    # 親アカウントの場合は、紐付く子供アカウントの支出を表示
     if parent_user
-      self_children = parent_user.children
-      @expences = []
-      self_children.each do |self_child|
-        @expences.concat(self_child.expences)
-      end
+      @q= Expence.joins(:user).select("expences.*, users.name AS user_name").where(users: { parent_id: parent_user.id }).ransack(params[:q])
+      @self_children = parent_user.children
+      @expences = @q.result(distinct: true).recent.page(params[:page])
     else
-      @expences = child_user.expences
+      @expences = child_user.expences.page(params[:page])
     end
   end
 
