@@ -1,0 +1,24 @@
+h1 子供アカウントの詳細
+
+.nav.justify-content-end
+  = link_to '一覧', admin_children_path, class: 'nav-link'
+table.table.table-hover
+  tbody
+    tr
+      th= User.human_attribute_name(:id)
+      td= @child.id
+    tr
+      th= User.human_attribute_name(:name)
+      td= @child.name
+    tr
+      th= User.human_attribute_name(:email)
+      td= @child.email
+    tr
+      th= User.human_attribute_name(:created_at)
+      td= @child.created_at
+    tr
+      th= User.human_attribute_name(:updated_at)
+      td= @child.updated_at
+
+= link_to '編集', edit_admin_child_path, class: 'btn btn-primary mr-3'
+= link_to '削除', admin_child_path(@child), method: :delete, data: { confirm: "「#{@child.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
