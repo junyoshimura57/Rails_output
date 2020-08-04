@@ -5,6 +5,12 @@
 ■アプリ名  
 子供のお小遣い管理アプリ(pocket money app)  
 
+■heroku  
+https://pocket-money-app.herokuapp.com  
+
+■Github  
+https://github.com/junyoshimura57/Rails_output
+
 ■機能概要  
 子供が支出をアプリに登録して、親が支出の使い道の確認をする。
 

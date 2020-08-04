@@ -1,0 +1,19 @@
+h1 子供アカウントの一覧
+
+= link_to '新規登録', new_admin_child_path, class: 'btn btn-primary'
+
+.mb-3
+table.table.table-hover
+  thead.thead-default
+    tr
+      th= User.human_attribute_name(:name)
+      th= User.human_attribute_name(:email)
+      th
+  tbody
+    - @children.each do |child|
+      tr
+        td= link_to child.name, admin_child_path(child)
+        td= child.email
+        td
+          = link_to '編集', edit_admin_child_path(child), class: 'btn btn-primary mr-3'
+          = link_to '削除', admin_child_path(child), method: :delete, data: { confirm: "「#{child.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
