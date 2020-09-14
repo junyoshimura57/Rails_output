@@ -1,9 +1,9 @@
 class ExpencesController < ApplicationController
-  before_action :set_expence, only: [:show, :edit, :update, :destroy]
+  before_action :set_expence, only: %i[show edit update destroy]
   def index
     # 親アカウントの場合は、紐付く子供アカウントの支出を表示
     if parent_user
-      @q= Expence.joins(:user).select("expences.*, users.name AS user_name").where(users: { parent_id: parent_user.id }).ransack(params[:q])
+      @q = Expence.joins(:user).select('expences.*, users.name AS user_name').where(users: { parent_id: parent_user.id }).ransack(params[:q])
       @self_children = parent_user.children
       @expences = @q.result(distinct: true).recent.page(params[:page])
     else
@@ -11,8 +11,7 @@ class ExpencesController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @expence = Expence.new
@@ -28,8 +27,7 @@ class ExpencesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @expence.update!(expence_params)
@@ -42,6 +40,7 @@ class ExpencesController < ApplicationController
   end
 
   private
+
   def expence_params
     params.require(:expence).permit(:name, :category, :amount, :description)
   end
