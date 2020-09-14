@@ -1,20 +1,19 @@
 class Admin::ChildrenController < Admin::BaseController
-  before_action :set_child, only: [:show, :edit, :update, :destroy]
+  before_action :set_child, only: %i[show edit update destroy]
 
   def index
     # 紐付く子供アカウントを取得
     @children = parent_user.children
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @child = User.new
   end
 
   def create
-    @child = parent_user.children.new(child_params) 
+    @child = parent_user.children.new(child_params)
     if @child.save
       redirect_to admin_children_path, notice: "「#{@child.name}」を作成しました。"
     else
@@ -22,8 +21,7 @@ class Admin::ChildrenController < Admin::BaseController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @child.update(child_params)
@@ -38,7 +36,8 @@ class Admin::ChildrenController < Admin::BaseController
     redirect_to admin_children_url, notice: "「#{@child.name}」を削除しました。"
   end
 
-  private 
+  private
+
   def child_params
     params.require(:child).permit(:name, :email, :password, :password_confirmation)
   end

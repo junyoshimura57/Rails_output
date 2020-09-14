@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::BaseController
-  skip_before_action :login_required, only: [:new, :create]
+  skip_before_action :login_required, only: %i[new create]
   # before_action :set_children, only: [:show, :edit, :update, :destroy]
 
   # def show
@@ -34,7 +34,8 @@ class Admin::UsersController < Admin::BaseController
   #   redirect_to admin_users_url, notice: "「#{@user.name}」を削除しました。"
   # end
 
-  private 
+  private
+
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
@@ -42,5 +43,4 @@ class Admin::UsersController < Admin::BaseController
   # def set_children
   #   @user = User.find(parent_user.id).children.find(params[:id])
   # end
-
 end
