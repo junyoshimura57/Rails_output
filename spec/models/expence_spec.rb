@@ -8,4 +8,14 @@ RSpec.describe Expence, type: :model do
       expect(expence.errors.added?(:amount, :not_a_number, value: 'test')).to be_truthy
     end
   end
+
+  describe 'アソシエーションのテスト' do
+    it `子供アカウントから支出を登録する` do
+      # child_user = FactoryBot.create(:child_user)
+      expence = FactoryBot.create(:expence)
+      puts "子供アカウントは#{expence.user.inspect}"
+      puts "親アカウントは#{expence.user.parent.inspect}"
+      puts "支出は#{expence.inspect}"
+    end
+  end
 end
