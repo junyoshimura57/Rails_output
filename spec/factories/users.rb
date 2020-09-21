@@ -5,11 +5,10 @@ FactoryBot.define do
     password {'test_password'}
   end
 
-  factory :child_user, class: User, aliases: [:user]  do
+  factory :child_user, class: User  do
     name {'テスト 子太郎'}
-    email {'kotaro@example.com'}
+    sequence(:email) { |n| "tester#{n}@example.com" }
     password {'test_password'}
     association :parent
   end
-
 end
