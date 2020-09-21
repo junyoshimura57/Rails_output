@@ -25,7 +25,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '1人目のユーザー登録からエラーになるケース' do  
+  describe '1人目のユーザー登録時点でエラーになるケース' do  
     context '名前がない場合' do
       it '無効な状態であること' do
         user = FactoryBot.build(:parent_user, name: nil)
