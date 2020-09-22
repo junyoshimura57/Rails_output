@@ -10,12 +10,13 @@ RSpec.describe Expence, type: :model do
   end
 
   describe 'アソシエーションのテスト' do
-    it `子供アカウントから支出を登録する` do
+    it '支出を登録すると関連する子供アカウントが作成されていること' do
       # child_user = FactoryBot.create(:child_user)
       expence = FactoryBot.create(:expence)
-      puts "子供アカウントは#{expence.user.inspect}"
-      puts "親アカウントは#{expence.user.parent.inspect}"
-      puts "支出は#{expence.inspect}"
+      # puts "子供アカウントは#{expence.user.inspect}"
+      # puts "親アカウントは#{expence.user.parent.inspect}"
+      # puts "支出は#{expence.inspect}"
+      expect(expence.user).to be_valid
     end
   end
 end
